@@ -1,0 +1,13 @@
+<div *ngIf="employee" class="mat-elevation-z8 employee-detail">
+    <a href="#" mat-icon-button color="primary" (click)="closeDetail()" class="close-detail">
+      <mat-icon aria-label="Close">close</mat-icon>
+    </a>
+    <h2>{{employee.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{employee.id}}</div>
+    <div>
+        <mat-form-field>
+            <input matInput [(ngModel)]="employee.name">
+        </mat-form-field>
+    </div>
+
+</div>

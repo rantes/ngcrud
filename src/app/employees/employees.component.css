@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+}
+
+.mat-sort-header-container {
+  align-items: center;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+th {
+    background-color: #cfcfcf;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+th.mat-column-actions {
+    width: 75px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+tr:nth-child(odd) td {
+    background-color: #efefef;
+}
