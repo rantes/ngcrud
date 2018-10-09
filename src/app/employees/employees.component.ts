@@ -24,13 +24,13 @@ export class EmployeesComponent implements OnInit {
         this.employeeService.getEmployees().subscribe(employees => {
             this.employees = employees
             this.sortedData = new MatTableDataSource(this.employees);
+            this.sortedData.sort = this.sort;
+            this.sortedData.paginator = this.paginator;
         });
     }
 
     ngOnInit() {
         this.getEmployees();
-        this.sortedData.sort = this.sort;
-        this.sortedData.paginator = this.paginator;
     }
 
     applyFilter(filterValue: string) {
