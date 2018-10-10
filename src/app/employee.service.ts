@@ -5,9 +5,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { Employee } from './employee';
 
-import { EMPLOYEES } from './mock-employees';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -52,10 +49,17 @@ export class EmployeeService {
     }
 
     getEmployee(id: number): Observable<Employee> {
-        return this.http.get<Employee>(this.employeesUrl).pipe(
+        return this.http.get<Employee>(`${this.employeesUrl}/${id}`).pipe(
                 tap(_ => this.log(`fetched employee id = ${id}`)),
                 catchError(this.handleError<Employee>(`getEmployee id ${id}`))
             );
+    }
+
+    updateHero (employee: Employee): Observable<any> {
+      return this.http.put(this.employeesUrl, employee, httpOptions).pipe(
+        tap(_ => this.log(`updated employee id=${employee.id}`)),
+        catchError(this.handleError<any>('updateHero'))
+      );
     }
 
 }

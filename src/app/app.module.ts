@@ -33,7 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule,
+    // HttpClientInMemoryWebApiModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,

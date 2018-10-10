@@ -26,13 +26,14 @@ export class EmployeeDetailComponent implements OnInit {
     this.getEmployee();
   }
 
-  closeDetail() {
-      this.employee = null;
+  save(): void {
+   this.employeeService.updateEmployee(this.employee)
+     .subscribe(() => this.goBack());
   }
 
   getEmployee(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-
+console.log('id', id);
     this.employeeService.getEmployee(id).subscribe(employee => this.employee = employee);
   }
 
