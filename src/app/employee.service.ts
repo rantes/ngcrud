@@ -34,7 +34,7 @@ export class EmployeeService {
     constructor(
       private http: HttpClient,
       private messageService: MessageService
-    ) { }
+    ) {}
 
     private log(message: string) {
         this.messageService.add(`HeroService: ${message}`);
@@ -55,10 +55,14 @@ export class EmployeeService {
             );
     }
 
-    updateHero (employee: Employee): Observable<any> {
+    updateEmployee (employee: Employee): Observable<any> {
+        const httpOptions = {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+
       return this.http.put(this.employeesUrl, employee, httpOptions).pipe(
         tap(_ => this.log(`updated employee id=${employee.id}`)),
-        catchError(this.handleError<any>('updateHero'))
+        catchError(this.handleError<any>('updateEmployee'))
       );
     }
 

@@ -37,4 +37,6 @@ console.log('id', id);
     this.employeeService.getEmployee(id).subscribe(employee => this.employee = employee);
   }
 
+  goBack(): void {}
+
 }
