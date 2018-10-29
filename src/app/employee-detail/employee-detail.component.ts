@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatFormFieldControl} from '@angular/material';
+import {MatFormFieldControl, MatDatepicker} from '@angular/material';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,6 +14,7 @@ import { Employee } from '../employee';
 })
 export class EmployeeDetailComponent implements OnInit {
   @Input() employee: Employee;
+  private idEmployee: number = 0;
 
   constructor(
       private route: ActivatedRoute,
@@ -24,7 +25,8 @@ export class EmployeeDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getEmployee();
+    this.idEmployee = +this.route.snapshot.paramMap.get('id');
+    this.idEmployee > 0 ? this.getEmployee() : (this.employee = new Employee());
   }
 
   save(): void {
@@ -33,8 +35,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   getEmployee(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.employeeService.getEmployee(id).subscribe(employee => this.employee = employee);
+    this.employeeService.getEmployee(this.idEmployee).subscribe(employee => this.employee = employee);
   }
 
   goBack(): void {

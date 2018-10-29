@@ -1,9 +1,16 @@
 <div *ngIf="employee" class="employee-detail">
-    <h2>{{employee.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{employee.id}}</div>
+    <h2 *ngIf="employee.id">{{employee.name | uppercase}} Details</h2>
+    <div *ngIf="employee.id"><span>id: </span>{{employee.id}}</div>
     <div>
         <mat-form-field>
             <input matInput [(ngModel)]="employee.name">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </div>
     <button (click)="save()">save</button>

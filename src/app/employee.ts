@@ -5,4 +5,5 @@ export class Employee {
     age: number;
     username: string;
     hired: number;
+    birthdate: number;
 };
