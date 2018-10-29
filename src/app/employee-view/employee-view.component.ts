@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {MatFormFieldControl} from '@angular/material';
-
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -8,28 +6,22 @@ import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
 
 @Component({
-  selector: 'app-employee-detail',
-  templateUrl: './employee-detail.component.html',
-  styleUrls: ['./employee-detail.component.css']
+  selector: 'app-employee-view',
+  templateUrl: './employee-view.component.html',
+  styleUrls: ['./employee-view.component.css']
 })
-export class EmployeeDetailComponent implements OnInit {
-  @Input() employee: Employee;
+export class EmployeeViewComponent implements OnInit {
+  employee: Employee;
 
   constructor(
       private route: ActivatedRoute,
       private router: Router,
       private employeeService: EmployeeService,
       private location: Location
-    ) { }
-
+  ) { }
 
   ngOnInit() {
     this.getEmployee();
-  }
-
-  save(): void {
-   this.employeeService.updateEmployee(this.employee)
-     .subscribe(() => this.goBack());
   }
 
   getEmployee(): void {
@@ -38,7 +30,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/employees']);
+      this.router.navigate(['/employees']);
   }
 
 }

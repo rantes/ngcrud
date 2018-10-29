@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatFormFieldControl, MatButton, MatIcon } from '@angular/material';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Employee} from '../employee';
 import { EmployeeService} from '../employee.service';
 
@@ -14,8 +17,12 @@ export class EmployeesComponent implements OnInit {
     displayedColumns = ['name','age','username','hired', 'actions'];
     selectedEmployee: Employee;
 
-    constructor(private employeeService: EmployeeService) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private employeeService: EmployeeService,
+        private router: Router,
+        private location: Location
+        ) { }
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -37,8 +44,13 @@ export class EmployeesComponent implements OnInit {
         this.sortedData.filter = filterValue.trim().toLowerCase();
     }
 
-    editEmployee(employee) {
-        this.selectedEmployee = employee;
+    deleteEmployee(employee: Employee): void {
+      this.employees = this.employees.filter(e => e !== employee);
+      this.employeeService.deleteEmployee(employee).subscribe(() => this.goBack());
+    }
+
+    goBack(): void {
+        this.router.navigate(['/employees']);
     }
 
 }

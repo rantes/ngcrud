@@ -30,6 +30,9 @@ export class EmployeeService {
     }
 
     private employeesUrl = 'api/employees';
+    private httpOptions = {
+                            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                          };
 
     constructor(
       private http: HttpClient,
@@ -56,13 +59,19 @@ export class EmployeeService {
     }
 
     updateEmployee (employee: Employee): Observable<any> {
-        const httpOptions = {
-          headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-        };
-
-      return this.http.put(this.employeesUrl, employee, httpOptions).pipe(
+      return this.http.put(this.employeesUrl, employee, this.httpOptions).pipe(
         tap(_ => this.log(`updated employee id=${employee.id}`)),
         catchError(this.handleError<any>('updateEmployee'))
+      );
+    }
+
+    deleteEmployee (employee: Employee | number): Observable<Employee> {
+      const id = typeof employee === 'number' ? employee : employee.id;
+      const url = `${this.employeesUrl}/${id}`;
+
+      return this.http.delete<Employee>(url, this.httpOptions).pipe(
+        tap(_ => this.log(`deleted employee id=${id}`)),
+        catchError(this.handleError<Employee>('deleteEmployee'))
       );
     }
 

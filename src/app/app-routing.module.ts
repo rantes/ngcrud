@@ -4,12 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmployeesComponent } from './employees/employees.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
+import { EmployeeViewComponent } from './employee-view/employee-view.component';
+
 
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'detail/:id', component: EmployeeDetailComponent },
+  { path: 'view/:id', component: EmployeeViewComponent },
   { path: 'employees', component: EmployeesComponent }
 ];
 
